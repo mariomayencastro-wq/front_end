@@ -1,14 +1,14 @@
 // src/App.jsx
 import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 import Configuracion from "./pages/Configuracion";
 
 function App() {
   return (
-    <div className="flex bg-gray-50 min-h-screen">
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFE' }}>
       <Sidebar />
-      <div className="flex-1">
-        <Configuracion />
-      </div>
+      <Header />
+      <Configuracion />
     </div>
   );
 }
