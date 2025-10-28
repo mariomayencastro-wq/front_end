@@ -3,14 +3,14 @@ import React from "react";
 
 const Table = ({ columns, data }) => {
   return (
-    <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-200">
-      <table className="min-w-full text-sm text-left">
-        <thead style={{ backgroundColor: '#1890FF26' }}>
+    <div className="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-100 w-full">
+      <table className="w-full text-xs sm:text-sm text-left">
+        <thead style={{ backgroundColor: '#F5F9FF' }}>
           <tr>
             {columns.map((col) => (
               <th 
                 key={col.accessor} 
-                className="px-6 py-4 font-semibold"
+                className="px-4 sm:px-8 py-4 sm:py-5 font-medium text-xs uppercase tracking-wide"
                 style={{ color: '#0095FF' }}
               >
                 {col.header}
@@ -23,15 +23,17 @@ const Table = ({ columns, data }) => {
             data.map((row, i) => (
               <tr
                 key={i}
-                className="hover:bg-gray-50 transition border-b last:border-none"
+                className="hover:bg-blue-25 transition border-b border-gray-50 last:border-none touch-manipulation"
               >
                 {columns.map((col) => (
                   <td 
                     key={col.accessor} 
-                    className="px-6 py-4"
-                    style={{ color: '#7B91B0' }}
+                    className="px-4 sm:px-8 py-4 sm:py-5 text-xs sm:text-sm"
+                    style={{ color: '#4A5568' }}
                   >
-                    {row[col.accessor]}
+                    <div className="truncate">
+                      {row[col.accessor]}
+                    </div>
                   </td>
                 ))}
               </tr>
@@ -40,8 +42,8 @@ const Table = ({ columns, data }) => {
             <tr>
               <td
                 colSpan={columns.length}
-                className="text-center py-4"
-                style={{ color: '#7B91B0' }}
+                className="text-center py-6 sm:py-8 text-xs sm:text-sm"
+                style={{ color: '#999999' }}
               >
                 No hay datos disponibles
               </td>

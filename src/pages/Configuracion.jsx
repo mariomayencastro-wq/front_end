@@ -70,28 +70,43 @@ const Configuracion = () => {
     setFormData({ nombre: "", impuestosAplicar: "" });
     setIsModalOpen(false);
   };
-
   const handleCloseModal = () => {
     setFormData({ nombre: "", impuestosAplicar: "" });
     setIsModalOpen(false);
-  };
+  };  return (
+    <div className="lg:ml-32 lg:mr-8 pt-28 lg:pt-32 p-4 sm:p-6 lg:p-8 min-h-screen">
+      {/* Título Configuración en negro */}
+      <h1 className="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8" style={{ color: '#000000' }}>
+        Configuración
+      </h1>
+      
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 lg:p-8 max-w-none">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 gap-4">
+          <h2 className="text-2xl sm:text-3xl font-semibold" style={{ color: '#0095FF' }}>
+            Clasificación de Contribuyente
+          </h2>
+          <button
+            className="px-4 py-3 sm:py-2 rounded-lg text-gray-600 font-medium hover:opacity-90 transition border border-gray-300 touch-manipulation min-h-[44px]"
+            style={{ backgroundColor: '#F7FAFF' }}
+          >
+            📤 Exportar
+          </button>
+        </div>
 
-  return (
-    <div className="ml-20 p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-semibold" style={{ color: '#0095FF' }}>
-          Clasificación de Contribuyente
-        </h1>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2 rounded-lg text-white font-medium hover:opacity-90 transition"
-          style={{ backgroundColor: '#0095FF' }}
-        >
-          + Agregar
-        </button>
+        <Table columns={columns} data={data} />
+        
+        {/* Agregar Nuevo Contribuyente */}
+        <div className="mt-6">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 text-blue-500 hover:text-blue-600 transition font-medium px-4 py-3 sm:py-2 rounded-lg border border-gray-300 touch-manipulation min-h-[44px]"
+            style={{ backgroundColor: '#FFFFFF' }}
+          >
+            <span className="text-xl">⊕</span>
+            Agregar Nuevo Contribuyente
+          </button>
+        </div>
       </div>
-
-      <Table columns={columns} data={data} />
 
       <Modal
         isOpen={isModalOpen}
@@ -109,7 +124,7 @@ const Configuracion = () => {
               value={formData.nombre}
               onChange={handleInputChange}
               placeholder="Gran Contribuyente"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-3 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 touch-manipulation text-base"
               required
             />
           </div>
@@ -122,7 +137,7 @@ const Configuracion = () => {
               name="impuestosAplicar"
               value={formData.impuestosAplicar}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-500"
+              className="w-full px-3 py-3 sm:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-500 touch-manipulation text-base"
               required
             >
               <option value="">Seleccionar</option>
@@ -135,7 +150,7 @@ const Configuracion = () => {
           <div className="flex justify-end pt-4">
             <button
               type="submit"
-              className="px-6 py-2 rounded-lg text-white font-medium hover:opacity-90 transition flex items-center gap-2"
+              className="px-6 py-3 sm:py-2 rounded-lg text-white font-medium hover:opacity-90 transition flex items-center gap-2 touch-manipulation"
               style={{ backgroundColor: '#0095FF' }}
             >
               <span>💾</span>
