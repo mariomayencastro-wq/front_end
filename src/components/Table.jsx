@@ -5,10 +5,14 @@ const Table = ({ columns, data }) => {
   return (
     <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-200">
       <table className="min-w-full text-sm text-left">
-        <thead className="bg-blue-50 text-gray-700">
+        <thead style={{ backgroundColor: '#1890FF26' }}>
           <tr>
             {columns.map((col) => (
-              <th key={col.accessor} className="px-4 py-3 font-semibold">
+              <th 
+                key={col.accessor} 
+                className="px-6 py-4 font-semibold"
+                style={{ color: '#0095FF' }}
+              >
                 {col.header}
               </th>
             ))}
@@ -19,10 +23,14 @@ const Table = ({ columns, data }) => {
             data.map((row, i) => (
               <tr
                 key={i}
-                className="hover:bg-blue-50 transition border-b last:border-none"
+                className="hover:bg-gray-50 transition border-b last:border-none"
               >
                 {columns.map((col) => (
-                  <td key={col.accessor} className="px-4 py-2 text-gray-700">
+                  <td 
+                    key={col.accessor} 
+                    className="px-6 py-4"
+                    style={{ color: '#7B91B0' }}
+                  >
                     {row[col.accessor]}
                   </td>
                 ))}
@@ -32,7 +40,8 @@ const Table = ({ columns, data }) => {
             <tr>
               <td
                 colSpan={columns.length}
-                className="text-center text-gray-400 py-4"
+                className="text-center py-4"
+                style={{ color: '#7B91B0' }}
               >
                 No hay datos disponibles
               </td>

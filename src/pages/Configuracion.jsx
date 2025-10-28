@@ -31,8 +31,8 @@ const Configuracion = () => {
   ];
 
   return (
-    <div className="ml-24 p-8">
-      <h1 className="text-2xl font-semibold mb-6 text-gray-800">
+    <div className="ml-20 p-8">
+      <h1 className="text-3xl font-semibold mb-8" style={{ color: '#0095FF' }}>
         Clasificación de Contribuyente
       </h1>
       <Table columns={columns} data={data} />
