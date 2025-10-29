@@ -1,16 +1,19 @@
 // src/pages/Configuracion.jsx
-import { useState } from "react";
+import React, { useState } from "react";
 import Table from "../components/Table";
 import Modal from "../components/Modal";
 
 const Configuracion = ({ activeSection }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentCatalog, setCurrentCatalog] = useState(null); // Which catalog is being edited
-  const [editingIndex, setEditingIndex] = useState(null); // Which row is being edited
-  const [selectedRowIndex, setSelectedRowIndex] = useState(null); // Which row is selected
+  const [currentCatalog, setCurrentCatalog] = useState(null);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const [formData, setFormData] = useState({
     nombre: "",
-    impuestosAplicar: ""
+    impuestosAplicar: "",
+    codigo: "",
+    descripcion: "",
+    dias: ""
   });
 
   const columns = [
@@ -74,37 +77,50 @@ const Configuracion = ({ activeSection }) => {
     // If editing, populate form with existing data
     if (index !== null) {
       switch (catalog) {
-        case "contribuyente":
+        case "contribuyente": {
           const contribData = data[index];
           setFormData({
             nombre: contribData.nombre,
-            impuestosAplicar: contribData.impuesto
+            impuestosAplicar: contribData.impuesto,
+            codigo: "",
+            descripcion: "",
+            dias: ""
           });
           break;
-        case "tipoDocumento":
+        }
+        case "tipoDocumento": {
           const tipoDocData = tipoDocumentoData[index];
           setFormData({
             nombre: tipoDocData.nombre,
             codigo: tipoDocData.codigo,
-            descripcion: tipoDocData.descripcion
+            descripcion: tipoDocData.descripcion,
+            impuestosAplicar: "",
+            dias: ""
           });
           break;
-        case "condicionPago":
+        }
+        case "condicionPago": {
           const condPagoData = condicionPagoData[index];
           setFormData({
             nombre: condPagoData.nombre,
             dias: condPagoData.dias,
-            descripcion: condPagoData.descripcion
+            descripcion: condPagoData.descripcion,
+            impuestosAplicar: "",
+            codigo: ""
           });
           break;
-        case "formaPago":
+        }
+        case "formaPago": {
           const formPagoData = formaPagoData[index];
           setFormData({
             nombre: formPagoData.nombre,
             codigo: formPagoData.codigo,
-            descripcion: formPagoData.descripcion
+            descripcion: formPagoData.descripcion,
+            impuestosAplicar: "",
+            dias: ""
           });
           break;
+        }
         default:
           break;
       }
@@ -125,20 +141,19 @@ const Configuracion = ({ activeSection }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!formData.nombre.trim()) {
+    if (!formData.nombre || !formData.nombre.trim()) {
       alert("Por favor, complete el campo de nombre");
       return;
     }
 
     switch (currentCatalog) {
       case "contribuyente":
-        if (!formData.impuestosAplicar.trim()) {
+        if (!formData.impuestosAplicar || !formData.impuestosAplicar.trim()) {
           alert("Por favor, seleccione el impuesto a aplicar");
           return;
         }
         
         if (editingIndex !== null) {
-          // Update existing record
           const updatedData = [...data];
           updatedData[editingIndex] = {
             ...updatedData[editingIndex],
@@ -147,7 +162,6 @@ const Configuracion = ({ activeSection }) => {
           };
           setData(updatedData);
         } else {
-          // Create new record
           const nuevoContribuyente = {
             nombre: formData.nombre,
             impuesto: formData.impuestosAplicar,
@@ -161,7 +175,7 @@ const Configuracion = ({ activeSection }) => {
         break;
 
       case "tipoDocumento":
-        if (!formData.codigo.trim()) {
+        if (!formData.codigo || !formData.codigo.trim()) {
           alert("Por favor, complete el campo de código");
           return;
         }
@@ -185,7 +199,7 @@ const Configuracion = ({ activeSection }) => {
         break;
 
       case "condicionPago":
-        if (!formData.dias.trim()) {
+        if (!formData.dias || !formData.dias.trim()) {
           alert("Por favor, complete el campo de días");
           return;
         }
@@ -209,7 +223,7 @@ const Configuracion = ({ activeSection }) => {
         break;
 
       case "formaPago":
-        if (!formData.codigo.trim()) {
+        if (!formData.codigo || !formData.codigo.trim()) {
           alert("Por favor, complete el campo de código");
           return;
         }
@@ -531,7 +545,7 @@ const Configuracion = ({ activeSection }) => {
               selectedRowIndex={currentCatalog === "contribuyente" ? selectedRowIndex : null}
             />
             
-            {/* Agregar Nuevo Contribuyente */}
+            {/* Agregar Nueva Clasificacion de Contribuyente */}
             <div className="mt-6 lg:mt-8">
               <button
                 onClick={() => handleOpenModal("contribuyente")}
@@ -539,7 +553,7 @@ const Configuracion = ({ activeSection }) => {
                 style={{ backgroundColor: '#FFFFFF' }}
               >
                 <span className="text-xl">⊕</span>
-                Agregar Nuevo Contribuyente
+                Agregar Nueva Clasificación de Contribuyente
               </button>
             </div>
           </div>
