@@ -1,7 +1,7 @@
 // src/components/Table.jsx
 import React from "react";
 
-const Table = ({ columns, data }) => {
+const Table = ({ columns, data, onRowSelect, selectedRowIndex }) => {
   return (
     <div className="overflow-x-auto w-full">
       <table className="w-full text-xs sm:text-sm text-left">
@@ -23,7 +23,10 @@ const Table = ({ columns, data }) => {
             data.map((row, i) => (
               <tr
                 key={i}
-                className="hover:bg-blue-25 transition border-b border-gray-50 last:border-none touch-manipulation"
+                onClick={() => onRowSelect && onRowSelect(i)}
+                className={`hover:bg-blue-50 transition border-b border-gray-50 last:border-none touch-manipulation ${
+                  selectedRowIndex === i ? 'bg-blue-100' : ''
+                } ${onRowSelect ? 'cursor-pointer' : ''}`}
               >
                 {columns.map((col) => (
                   <td 
