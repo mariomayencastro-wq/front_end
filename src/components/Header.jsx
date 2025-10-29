@@ -2,7 +2,9 @@
 import { useState } from "react";
 
 const Header = () => {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);  return (
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  
+  return (
     <header className="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-30 lg:left-32 lg:ml-4 lg:mr-8 lg:mt-6 lg:rounded-xl">
       <div className="flex items-center justify-end gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
         {/* Search Icon */}
@@ -46,7 +48,7 @@ const Header = () => {
             
             {/* User name - Hidden on mobile */}
             <span className="hidden sm:block text-sm font-medium text-gray-700">
-              Alvaro
+              Mario 
             </span>
             
             {/* Dropdown arrow */}
@@ -65,8 +67,8 @@ const Header = () => {
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 touch-manipulation">
               <div className="py-2">
                 <div className="px-4 py-2 border-b border-gray-100">
-                  <p className="text-sm font-medium text-gray-900">Alvaro</p>
-                  <p className="text-xs text-gray-500">alvaro@empresa.com</p>
+                  <p className="text-sm font-medium text-gray-900">Mario</p>
+                  <p className="text-xs text-gray-500">Mario@empresa.com</p>
                 </div>
                 
                 <button className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition-colors touch-manipulation">
