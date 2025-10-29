@@ -5,13 +5,14 @@ import ayudaicon from "../assets/icons/ayuda.png";
 import posIcon from "../assets/icons/posicon.png";
 import catalogosIcon from "../assets/icons/catalogosicon.png";
 import logoDecima from "../assets/icons/logoDecima.png";
+import configuracionIcon from "../assets/icons/configuracionicon.png";
 
 
 
 
 
-const Sidebar = () => {
-  const [active, setActive] = useState("configuracion");
+
+const Sidebar = ({ activeSection, onSectionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
@@ -19,7 +20,7 @@ const Sidebar = () => {
     { id: "catalogo", label: "Catalogo", icon: catalogosIcon },
     { id: "pos", label: "POS", icon: posIcon },
     { id: "ayuda", label: "Ayuda", icon: ayudaicon},
-    { id: "configuracion", label: "Configuración", icon: ayudaicon },
+    { id: "configuracion", label: "Configuración", icon: configuracionIcon },
   ];
 
   return (
@@ -56,12 +57,12 @@ const Sidebar = () => {
 
         <nav className="flex flex-col gap-3 w-full px-3">
           {menuItems.map((item) => {
-            const isActive = active === item.id;
+            const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => {
-                  setActive(item.id);
+                  onSectionChange(item.id);
                   setIsOpen(false); // Close mobile menu when item is selected
                 }}
                 aria-pressed={isActive}
