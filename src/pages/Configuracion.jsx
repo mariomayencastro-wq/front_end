@@ -277,6 +277,40 @@ const Configuracion = ({ activeSection }) => {
     }
   };
 
+  const handleDelete = () => {
+    if (selectedRowIndex === null || !currentCatalog) {
+      return;
+    }
+
+    // Confirmación antes de eliminar
+    const confirmDelete = window.confirm("¿Está seguro que desea eliminar este elemento?");
+    if (!confirmDelete) {
+      return;
+    }
+
+    // Eliminar según el catálogo actual
+    switch (currentCatalog) {
+      case "contribuyente":
+        setData(prevData => prevData.filter((_, index) => index !== selectedRowIndex));
+        break;
+      case "tipoDocumento":
+        setTipoDocumentoData(prevData => prevData.filter((_, index) => index !== selectedRowIndex));
+        break;
+      case "condicionPago":
+        setCondicionPagoData(prevData => prevData.filter((_, index) => index !== selectedRowIndex));
+        break;
+      case "formaPago":
+        setFormaPagoData(prevData => prevData.filter((_, index) => index !== selectedRowIndex));
+        break;
+      default:
+        break;
+    }
+
+    // Limpiar selección después de eliminar
+    setSelectedRowIndex(null);
+    setCurrentCatalog(null);
+  };
+
   const getModalTitle = () => {
     const action = editingIndex !== null ? "Editar" : "Crear Nuevo";
     switch (currentCatalog) {
@@ -526,7 +560,13 @@ const Configuracion = ({ activeSection }) => {
                 
                 {/* Icono de Eliminar */}
                 <button
-                  className="p-2 rounded-lg hover:opacity-90 transition-colors touch-manipulation"
+                  onClick={handleDelete}
+                  disabled={selectedRowIndex === null || currentCatalog !== "contribuyente"}
+                  className={`p-2 rounded-lg transition-colors touch-manipulation ${
+                    selectedRowIndex !== null && currentCatalog === "contribuyente"
+                      ? 'hover:opacity-90'
+                      : 'opacity-40 cursor-not-allowed'
+                  }`}
                   style={{ backgroundColor: '#F7FAFF' }}
                   aria-label="Eliminar configuración"
                   title="Eliminar configuración"
@@ -585,7 +625,13 @@ const Configuracion = ({ activeSection }) => {
                 
                 {/* Icono de Eliminar */}
                 <button
-                  className="p-2 rounded-lg hover:opacity-90 transition-colors touch-manipulation"
+                  onClick={handleDelete}
+                  disabled={selectedRowIndex === null || currentCatalog !== "tipoDocumento"}
+                  className={`p-2 rounded-lg transition-colors touch-manipulation ${
+                    selectedRowIndex !== null && currentCatalog === "tipoDocumento"
+                      ? 'hover:opacity-90'
+                      : 'opacity-40 cursor-not-allowed'
+                  }`}
                   style={{ backgroundColor: '#F7FAFF' }}
                   aria-label="Eliminar tipo de documento"
                   title="Eliminar tipo de documento"
@@ -648,7 +694,13 @@ const Configuracion = ({ activeSection }) => {
                 
                 {/* Icono de Eliminar */}
                 <button
-                  className="p-2 rounded-lg hover:opacity-90 transition-colors touch-manipulation"
+                  onClick={handleDelete}
+                  disabled={selectedRowIndex === null || currentCatalog !== "condicionPago"}
+                  className={`p-2 rounded-lg transition-colors touch-manipulation ${
+                    selectedRowIndex !== null && currentCatalog === "condicionPago"
+                      ? 'hover:opacity-90'
+                      : 'opacity-40 cursor-not-allowed'
+                  }`}
                   style={{ backgroundColor: '#F7FAFF' }}
                   aria-label="Eliminar condición de pago"
                   title="Eliminar condición de pago"
@@ -711,7 +763,13 @@ const Configuracion = ({ activeSection }) => {
                 
                 {/* Icono de Eliminar */}
                 <button
-                  className="p-2 rounded-lg hover:opacity-90 transition-colors touch-manipulation"
+                  onClick={handleDelete}
+                  disabled={selectedRowIndex === null || currentCatalog !== "formaPago"}
+                  className={`p-2 rounded-lg transition-colors touch-manipulation ${
+                    selectedRowIndex !== null && currentCatalog === "formaPago"
+                      ? 'hover:opacity-90'
+                      : 'opacity-40 cursor-not-allowed'
+                  }`}
                   style={{ backgroundColor: '#F7FAFF' }}
                   aria-label="Eliminar forma de pago"
                   title="Eliminar forma de pago"
